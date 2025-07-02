@@ -1,0 +1,49 @@
+/* src/index.css */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Puedes añadir tus estilos CSS personalizados aquí si los necesitas */
+
+:root {
+  --primary-color: #0c7ff2;
+  --background-color: #f0f2f5;
+  --background-color-original: #f0f2f5;
+  --text-primary: #111418;
+  --text-secondary: #60758a;
+  --surface-color: #ffffff;
+  --accent-color: #ff9800;
+  --error-color: #d32f2f;
+  --success-color: #2e7d32;
+
+  --secondary-text-color: #52525b;
+  --background-color: #f8fafc;
+  --card-background-color: #ffffff;
+  --icon-color: #3f3f46;
+  --border-color: #e2e8f0;
+  --input-background-color: #f1f5f9;
+  --placeholder-color: #94a3b8;
+
+  --divider-color: #e5e7eb;
+
+  --primary-color-light: #e3f2fd;
+  --primary-color-dark: #0a65c2;
+  --surface-background: #ffffff;
+  --surface-container: #f3f4f6;
+  --surface-container-high: #e5e7eb;
+  --outline: #d1d5db;
+
+  --secondary-color: #f0f2f5;
+  --on-surface-variant: #49454f;
+  --outline-variant: #cac4d0;
+}
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+body {
+  font-family: "Roboto", "Inter", "Noto Sans", sans-serif;
+}
+.material-icons-outlined {
+  font-size: 24px;
+}
