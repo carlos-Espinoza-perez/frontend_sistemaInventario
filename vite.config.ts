@@ -21,7 +21,7 @@ export default defineConfig({
       includeAssets: ["Logo-192.png", "Logo-512.png"],
       manifest: {
         name: "Sistema de inventario",
-        short_name: "SI",
+        short_name: "Inventario",
         start_url: "/",
         display: "standalone",
         background_color: "#ffffff",
