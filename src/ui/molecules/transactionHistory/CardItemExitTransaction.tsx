@@ -1,6 +1,5 @@
 import { useState } from "react";
 import formatMoney, { formatNumber } from "../../../hook/func/formatMoney";
-import type { IInventoryMovements } from "../../../interface/InventoryInterface";
 import type { ISale } from "../../../interface/ISaleInterface";
 import { axiosPrivate } from "../../../services/AxiosInstance";
 

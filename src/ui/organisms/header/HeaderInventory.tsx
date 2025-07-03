@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { setCategoryFilterId, setGroupByItemsByItemId, setListItemFiltered, setWarehouseFilterId, toggleOrderDirection } from "../../../features/InventorySlice";
 import { useAppDispatch } from "../../../hook/useAppDispatch";
 import { useAppSelector } from "../../../hook/useAppSelector";

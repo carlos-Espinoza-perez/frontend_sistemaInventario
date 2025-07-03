@@ -1,6 +1,4 @@
 import { useEffect, useState, type ChangeEvent } from "react";
-import { useLocalStorage } from "../../../hook/useLocalStorage";
-import type { IItem } from "../../../interface/ItemInterface";
 import AnimatedSelect from "../gen/AnimatedSelect";
 import type { IInventoryMovements } from "../../../interface/InventoryInterface";
 import type { IOption } from "../../../interface/GenInterface";

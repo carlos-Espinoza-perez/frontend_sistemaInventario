@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import type { IInfoItems } from "../../../interface/HomeInterface";
 import { axiosPrivate } from "../../../services/AxiosInstance";
-import formatMoney, { formatNumber } from "../../../hook/func/formatMoney";
+import formatMoney from "../../../hook/func/formatMoney";
 import { Link } from "react-router-dom";
 
 const InfoItems = () => {

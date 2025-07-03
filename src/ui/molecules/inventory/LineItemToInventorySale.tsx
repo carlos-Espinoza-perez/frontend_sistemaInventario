@@ -4,7 +4,7 @@ import type { IInventoryMovements } from "../../../interface/InventoryInterface"
 import type { IOption } from "../../../interface/GenInterface";
 import { useAppSelector } from "../../../hook/useAppSelector";
 import formatMoney, { formatNumber } from "../../../hook/func/formatMoney";
-import { FormGroup, FormControlLabel, Checkbox, Switch } from "@mui/material";
+import { FormGroup, FormControlLabel, Switch } from "@mui/material";
 
 const LineItemToInventorySale = ({ item, setRemoveItem, changeValue }: { item: IInventoryMovements, setRemoveItem: () => void; changeValue: (item: IInventoryMovements) => void; }) => {
   const listItemToInventory = useAppSelector(a => a.inventory.listItemByInventory);
