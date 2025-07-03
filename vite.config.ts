@@ -18,26 +18,26 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: "autoUpdate",
-      includeAssets: ["vite.svg"],
+      includeAssets: ["Logo-192.png", "Logo-512.png"],
       manifest: {
         name: "Sistema de inventario",
-        short_name: "SDI",
+        short_name: "SI",
         start_url: "/",
         display: "standalone",
         background_color: "#ffffff",
         theme_color: "#000000",
-        // icons: [
-        //   {
-        //     src: "pwa-192x192.png",
-        //     sizes: "192x192",
-        //     type: "image/png",
-        //   },
-        //   {
-        //     src: "pwa-512x512.png",
-        //     sizes: "512x512",
-        //     type: "image/png",
-        //   },
-        // ],
+        icons: [
+          {
+            src: "Logo-192.png",
+            sizes: "192x192",
+            type: "image/png",
+          },
+          {
+            src: "Logo-512.png",
+            sizes: "512x512",
+            type: "image/png",
+          },
+        ],
       },
     }),
   ],
