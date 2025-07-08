@@ -1,5 +1,3 @@
-import type { CSSProperties } from "@mui/material";
-
 export interface IOption {
   value: string;
   label: string;
