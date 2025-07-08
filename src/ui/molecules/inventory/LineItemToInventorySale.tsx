@@ -6,17 +6,25 @@ import { useAppSelector } from "../../../hook/useAppSelector";
 import formatMoney, { formatNumber } from "../../../hook/func/formatMoney";
 import { FormGroup, FormControlLabel, Switch } from "@mui/material";
 
-const LineItemToInventorySale = ({ item, setRemoveItem, changeValue }: { item: IInventoryMovements, setRemoveItem: () => void; changeValue: (item: IInventoryMovements) => void; }) => {
+const LineItemToInventorySale = (
+  { item, setRemoveItem, changeValue, index }:
+    {
+      item: IInventoryMovements,
+      setRemoveItem: () => void;
+      changeValue: (item: IInventoryMovements) => void;
+      index: number
+    }
+) => {
+  const baseTabIndex = index * 10;
   const listItemToInventory = useAppSelector(a => a.inventory.listItemByInventory);
-  
+
   const requiredFields = ["item_id", "quantity", "sale_price"];
   const [tempValue, setTempValue] = useState<IInventoryMovements>(item);
 
-  console.log(item);
   const handleChange = (
     e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLTextAreaElement>
   ) => {
-    if (e.target.name === "quantity") { 
+    if (e.target.name === "quantity") {
       const isValid = e.target.validity.valid;
       if (!isValid) {
         alert(e.target.validationMessage);
@@ -48,11 +56,13 @@ const LineItemToInventorySale = ({ item, setRemoveItem, changeValue }: { item: I
     changeValue(tempValue);
   };
 
+  const colorFieldValid = (name: string) =>
+    tempValue[name] != 0 ? "border-green-600" : "border-red-600";
+
+
   useEffect(() => {
     reviewTempValue();
   }, [tempValue]);
-
-
 
   return (
     <div className="space-y-0">
@@ -65,13 +75,14 @@ const LineItemToInventorySale = ({ item, setRemoveItem, changeValue }: { item: I
               label="Seleccionar producto"
               change={changeSelect}
               defaultOptionValue={item.item_id.toString()}
+              isCorrect={tempValue.item_id != 0}
             />
           </div>
         </div>
         <div className="w-24">
           <label className="block text-[var(--text-primary)] text-sm font-medium leading-tight mb-1" htmlFor="quantity-1">Cantidad</label>
           <input
-            className="form-input block w-full rounded-lg text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] border border-[var(--border-color)] bg-white h-12 placeholder:text-[var(--text-secondary)] px-3 text-sm font-normal leading-normal"
+            className={`form-input block w-full rounded-lg text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] border ${colorFieldValid("quantity")} bg-white h-12 placeholder:text-[var(--text-secondary)] px-3 text-sm font-normal leading-normal`}
             id={`quantity-${item.key}`}
             placeholder="Cant"
             type="number"
@@ -80,12 +91,14 @@ const LineItemToInventorySale = ({ item, setRemoveItem, changeValue }: { item: I
             onBlur={handleChange}
             name="quantity"
             max={item.total_quantity?.toString() || "0"}
+            tabIndex={baseTabIndex + 1}
           />
           <p className="text-[var(--text-secondary)] text-xs font-normal leading-normal mt-1">
-            Max: {formatNumber(parseInt(item.total_quantity?.toString()))} unds
+            Max: {formatNumber(parseInt(item.total_quantity?.toString() || "0")) } unds
           </p>
         </div>
         <button
+          tabIndex={-1}
           onClick={setRemoveItem}
           className="p-2 text-[var(--text-secondary)] hover:text-[var(--primary-color)] transition-colors">
           <span className="material-icons">delete</span>
@@ -96,7 +109,7 @@ const LineItemToInventorySale = ({ item, setRemoveItem, changeValue }: { item: I
         <div>
           <label className="block text-[var(--text-primary)] text-sm font-medium leading-tight mb-1" htmlFor="selling-price-1">Precio de venta</label>
           <input
-            className="form-input block w-full rounded-lg text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] border border-[var(--border-color)] bg-white h-12 placeholder:text-[var(--text-secondary)] px-3 text-sm font-normal leading-normal"
+            className={`form-input block w-full rounded-lg text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] border ${colorFieldValid("sale_price")} bg-white h-12 placeholder:text-[var(--text-secondary)] px-3 text-sm font-normal leading-normal`}
             id={`selling-price-${item.key}`}
             placeholder="e.g. 15.99"
             step="0.01"
@@ -105,6 +118,7 @@ const LineItemToInventorySale = ({ item, setRemoveItem, changeValue }: { item: I
 
             onBlur={handleChange}
             name="sale_price"
+            tabIndex={baseTabIndex + 2}
           />
 
           <p className="text-[var(--text-secondary)] text-xs font-normal leading-normal mt-1">

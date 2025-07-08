@@ -4,10 +4,19 @@ import type { IInventoryMovements } from "../../../interface/InventoryInterface"
 import type { IOption } from "../../../interface/GenInterface";
 import { useAppSelector } from "../../../hook/useAppSelector";
 
-const LineItemToInventoryMovements = ({ item, setRemoveItem, changeValue }: { item: IInventoryMovements, setRemoveItem: () => void; changeValue: (item: IInventoryMovements) => void; }) => {
+const LineItemToInventoryMovements = ({
+  item, setRemoveItem, changeValue, addNewLine,
+  index
+}:
+  {
+    item: IInventoryMovements, setRemoveItem: () => void; changeValue: (item: IInventoryMovements) => void; addNewLine: () => void;
+    index: number
+   }
+) => {
+  const baseTabIndex = index * 10;
   const listItemToInventory = useAppSelector(a => a.inventory.listItemByInventory);
-  
-  const requiredFields = ["item_id", "quantity"];
+
+  const requiredFields = ["item_id", "quantity", "purchase_price", "sale_price"];
   const [tempValue, setTempValue] = useState<IInventoryMovements>(item);
 
   const handleChange = (
@@ -25,6 +34,11 @@ const LineItemToInventoryMovements = ({ item, setRemoveItem, changeValue }: { it
       item_name: value.label,
       item_id: parseInt(value.value)
     })
+
+    // Si no hay cantidad en quanty que haga un focus
+    if (!tempValue.quantity) {
+      document.getElementById(`quantity-${item.key}`)?.focus();
+    }
   };
 
   const reviewTempValue = () => {
@@ -34,10 +48,26 @@ const LineItemToInventoryMovements = ({ item, setRemoveItem, changeValue }: { it
     changeValue(tempValue);
   };
 
+  const colorFieldValid = (name: string) =>
+    tempValue[name] != 0 ? "border-green-600" : "border-red-600";
+
   useEffect(() => {
     reviewTempValue();
   }, [tempValue]);
 
+  useEffect(() => {
+    // Si ya esta lleno todo y se da enter en Precio de venta agrega una nueva linea
+    const sellingPrice = document.getElementById(`selling-price-${item.key}`) as HTMLInputElement | null;
+    sellingPrice?.addEventListener("keydown", (event) => {
+      const isEnter = event.key === "Enter"
+      if (!isEnter) return;
+
+      const missingFields = requiredFields.filter((field: string) => !tempValue[field]);
+      if (!missingFields) return;
+
+      addNewLine();
+    });
+  }, [item.key]);
 
 
   return (
@@ -51,23 +81,26 @@ const LineItemToInventoryMovements = ({ item, setRemoveItem, changeValue }: { it
               label="Seleccionar producto"
               change={changeSelect}
               defaultOptionValue={item.item_id.toString()}
+              isCorrect={item.item_id != 0}
             />
           </div>
         </div>
         <div className="w-24">
           <label className="block text-[var(--text-primary)] text-sm font-medium leading-tight mb-1" htmlFor="quantity-1">Cantidad</label>
           <input
-            className="form-input block w-full rounded-lg text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] border border-[var(--border-color)] bg-white h-12 placeholder:text-[var(--text-secondary)] px-3 text-sm font-normal leading-normal"
+            className={`form-input block w-full rounded-lg text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] border ${colorFieldValid("quantity")} bg-white h-12 placeholder:text-[var(--text-secondary)] px-3 text-sm font-normal leading-normal`}
             id={`quantity-${item.key}`}
             placeholder="Cant"
             type="number"
 
             defaultValue={item.quantity == 0 ? "" : item.quantity}
-            onBlur={handleChange}
+            onChange={handleChange}
             name="quantity"
+            tabIndex={baseTabIndex + 1}
           />
         </div>
         <button
+          tabIndex={-1}
           onClick={setRemoveItem}
           className="p-2 text-[var(--text-secondary)] hover:text-[var(--primary-color)] transition-colors">
           <span className="material-icons">delete</span>
@@ -77,30 +110,39 @@ const LineItemToInventoryMovements = ({ item, setRemoveItem, changeValue }: { it
         <div>
           <label className="block text-[var(--text-primary)] text-sm font-medium leading-tight mb-1" htmlFor="purchase-price-1">Precio de compra</label>
           <input
-            className="form-input block w-full rounded-lg text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] border border-[var(--border-color)] bg-white h-12 placeholder:text-[var(--text-secondary)] px-3 text-sm font-normal leading-normal"
+            className={
+              `form-input block w-full rounded-lg text-[var(--text-primary)] 
+              focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] 
+              focus:border-[var(--primary-color)] border ${colorFieldValid("purchase_price")}
+              bg-white h-12 placeholder:text-[var(--text-secondary)] px-3 text-sm 
+              font-normal leading-normal`
+            }
             id={`purchase-price-${item.key}`}
             placeholder="e.g. 10.99"
             step="0.01"
             type="number"
             defaultValue={item.purchase_price == 0 ? "" : item.purchase_price}
 
-            onBlur={handleChange}
+            onChange={handleChange}
             name="purchase_price"
-
+            tabIndex={baseTabIndex + 2}
           />
         </div>
         <div>
           <label className="block text-[var(--text-primary)] text-sm font-medium leading-tight mb-1" htmlFor="selling-price-1">Precio de venta</label>
           <input
-            className="form-input block w-full rounded-lg text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] border border-[var(--border-color)] bg-white h-12 placeholder:text-[var(--text-secondary)] px-3 text-sm font-normal leading-normal"
+            className={
+              `form-input block w-full rounded-lg text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] border ${colorFieldValid("sale_price")} bg-white h-12 placeholder:text-[var(--text-secondary)] px-3 text-sm font-normal leading-normal`
+            }
             id={`selling-price-${item.key}`}
             placeholder="e.g. 15.99"
             step="0.01"
             type="number"
             defaultValue={item.sale_price == 0 ? "" : item.sale_price}
 
-            onBlur={handleChange}
+            onChange={handleChange}
             name="sale_price"
+            tabIndex={baseTabIndex + 3}
           />
         </div>
       </div>

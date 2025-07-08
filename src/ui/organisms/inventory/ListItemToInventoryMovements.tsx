@@ -33,6 +33,12 @@ const ListItemToInventoryMovements = ({ type }: { type: 'entrada' | 'salida' }) 
     const newList = [...listItem, itemEmpty];
     setListItem(newList);
     updateListItemStorage(newList);
+
+    // Llevar al final del navegador con un scroll suave
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: "smooth",
+    });
   };
 
   const removeLine = (key: string) => {
@@ -79,6 +85,7 @@ const ListItemToInventoryMovements = ({ type }: { type: 'entrada' | 'salida' }) 
                     <LineItemToInventorySale
                       key={a.id}
                       item={a}
+                      index={index}
                       setRemoveItem={() => removeLine(a.key as string)}
                       changeValue={updateLine}
                     />
@@ -88,9 +95,11 @@ const ListItemToInventoryMovements = ({ type }: { type: 'entrada' | 'salida' }) 
                   type === "entrada" && (
                     <LineItemToInventoryMovements
                       key={a.id}
+                      index={index}
                       item={a}
                       setRemoveItem={() => removeLine(a.key as string)}
                       changeValue={updateLine}
+                      addNewLine={addNewLine}
                     />
                   )
                 }

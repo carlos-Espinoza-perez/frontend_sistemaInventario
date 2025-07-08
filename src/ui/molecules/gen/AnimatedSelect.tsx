@@ -69,7 +69,7 @@ export default function AnimatedSelect(props: IAnimatedSelect) {
             }
         }
         transition={{ duration: 0.3 }}
-        className="bg-white rounded-lg border border-[var(--border-color)] text-[var(--text-primary)] text-sm"
+        className={`bg-white rounded-xl border ${(open ? "border-[var(--border-color)]" : (props.isCorrect == true ? "border-green-600" : props.isCorrect == false ? "border-red-600" : "border-[var(--border-color)]"))} text-[var(--text-primary)] text-sm`}
       >
         
         {
@@ -97,7 +97,7 @@ export default function AnimatedSelect(props: IAnimatedSelect) {
               {filteredOptions.map((o) => (
                 <li
                   key={o.value}
-                  className="px-3 py-2 hover:bg-gray-100 cursor-pointer text-sm"
+                  className="px-3 py-3 hover:bg-gray-100 cursor-pointer"
                   onClick={() => {
                     handleSelect(o.value);
                     props.change(o);

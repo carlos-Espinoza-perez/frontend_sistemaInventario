@@ -1,3 +1,5 @@
+import type { CSSProperties } from "@mui/material";
+
 export interface IOption {
   value: string;
   label: string;
@@ -11,6 +13,7 @@ export interface IAnimatedSelect {
 
   defaultOptionValue?: string;
   change: (value: IOption) => void;
+  isCorrect?: boolean | undefined;
 }
 
 export interface IButtonHeaderFilter {
