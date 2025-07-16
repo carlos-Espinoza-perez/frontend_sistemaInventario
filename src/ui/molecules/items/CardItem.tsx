@@ -16,7 +16,7 @@ const CardItem = ({ item }: { item: IInventoryGrouped }) => {
           {item.item_name}
         </p>
         <p className="text-[var(--secondary-text-color)] text-sm font-normal leading-normal truncate">
-          {formatNumber(item.total_quantity)} und (<span>{formatMoney(item.total_investment)}</span>)
+          {formatNumber(item.total_quantity)} und (<span>{formatMoney(item.last_purchase_price || 0)}</span>)
         </p>
       </div>
       <span className="material-icons-outlined text-[var(--secondary-text-color)]">

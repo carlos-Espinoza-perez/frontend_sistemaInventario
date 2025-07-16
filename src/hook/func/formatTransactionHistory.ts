@@ -8,61 +8,33 @@ function formatearFechaES(fecha: Date): string {
   });
 }
 
-// 📌 Obtiene lunes de la semana
-function getInicioSemana(dateStr: string): Date {
-  const date = new Date(dateStr);
-  const day = date.getDay(); // 0: domingo, 1: lunes...
-  const diff = (day === 0 ? -6 : 1) - day; // diferencia hasta lunes
-  const lunes = new Date(date);
-  lunes.setDate(date.getDate() + diff);
-  lunes.setHours(0, 0, 0, 0);
-  return lunes;
-}
-
-// 📌 Obtiene domingo de la semana
-function getFinSemana(inicio: Date): Date {
-  const domingo = new Date(inicio);
-  domingo.setDate(inicio.getDate() + 6);
-  domingo.setHours(23, 59, 59, 999);
-  return domingo;
-}
-
-// 📌 Formato final tipo: "Semana del 01 de julio al 07 de julio"
-function formatearRangoSemana(inicio: Date, fin: Date): string {
-  return `Semana del ${formatearFechaES(inicio)} al ${formatearFechaES(fin)}`;
-}
-
 export function agrupadoPorRangoFecha(lista: IItemMovementGroupSaleAndPurchase[]): IAgrupacionMovimiento[] {
-  const semanasMap = new Map<string, IItemMovementGroupSaleAndPurchase[]>();
+  const diasMap = new Map<string, IItemMovementGroupSaleAndPurchase[]>();
 
   lista.forEach((item) => {
-    const inicio = getInicioSemana(item.created_at);
-    const fin = getFinSemana(inicio);
+    const fecha = new Date(item.created_at);
+    fecha.setHours(0, 0, 0, 0); // Eliminar hora para agrupar solo por fecha
+    const key = fecha.toISOString().split("T")[0]; // "YYYY-MM-DD"
 
-    const key = `${inicio.toISOString()}|${fin.toISOString()}`;
-
-    if (!semanasMap.has(key)) {
-      semanasMap.set(key, []);
+    if (!diasMap.has(key)) {
+      diasMap.set(key, []);
     }
-    semanasMap.get(key)!.push(item);
+    diasMap.get(key)!.push(item);
   });
 
   const grupos: IAgrupacionMovimiento[] = [];
 
-  semanasMap.forEach((items, key) => {
-    const [inicioStr, finStr] = key.split("|");
-    const inicio = new Date(inicioStr);
-    const fin = new Date(finStr);
-
-    const nombreSemana = formatearRangoSemana(inicio, fin);
-    grupos.push({ name: nombreSemana, listMovements: items });
+  diasMap.forEach((items, key) => {
+    const fecha = new Date(key);
+    const nombreDia = formatearFechaES(fecha);
+    grupos.push({ name: nombreDia, listMovements: items });
   });
 
-  // Ordenar por la primera fecha de los elementos
+  // 📌 Ordenar por fecha descendente (más reciente primero)
   grupos.sort((a, b) => {
     const fechaA = new Date(a.listMovements[0].created_at).getTime();
     const fechaB = new Date(b.listMovements[0].created_at).getTime();
-    return fechaA - fechaB;
+    return fechaB - fechaA;
   });
 
   return grupos;

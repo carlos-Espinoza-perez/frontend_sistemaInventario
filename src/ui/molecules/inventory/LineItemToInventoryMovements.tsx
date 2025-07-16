@@ -108,7 +108,7 @@ const LineItemToInventoryMovements = ({
       </div>
       <div className="grid grid-cols-2 gap-2">
         <div>
-          <label className="block text-[var(--text-primary)] text-sm font-medium leading-tight mb-1" htmlFor="purchase-price-1">Precio de compra</label>
+          <label className="block text-[var(--text-primary)] text-sm font-medium leading-tight mb-1" htmlFor="purchase-price-1">Costo de compra</label>
           <input
             className={
               `form-input block w-full rounded-lg text-[var(--text-primary)] 

@@ -27,16 +27,16 @@ const CardDetailEntryTransaction = () => {
         <p className="text-[var(--text-primary)] text-base font-semibold">{formatNumber(data?.total_items || 0)}</p>
       </div>
       <div className="mt-2 flex justify-between items-center">
-        <p className="text-[var(--text-secondary)] text-sm">Total invertido:</p>
+        <p className="text-[var(--text-secondary)] text-sm">Costo invertido:</p>
         <p className="text-[var(--accent-color)] text-base font-bold">{formatMoney(data?.total_purchase_price || 0)}</p>
       </div>
       <div className="mt-2 flex justify-between items-center">
         <p className="text-[var(--text-secondary)] text-sm">Total esperado:</p>
-        <p className="text-[var(--accent-color)] text-base font-bold">{formatMoney(data?.total_sale_price || 0)}</p>
+        <p className="text-[var(--success-color)] text-base font-bold">{formatMoney(data?.total_sale_price || 0)}</p>
       </div>
       <div className="mt-2 flex justify-between items-center">
         <p className="text-[var(--text-secondary)] text-sm">Ganancia esperada:</p>
-        <p className="text-[var(--accent-color)] text-base font-bold">{formatMoney(((data?.total_sale_price || 0) - (data?.total_purchase_price || 0)) || 0)}</p>
+        <p className="text-[var(--success-color)] text-base font-bold">{formatMoney(((data?.total_sale_price || 0) - (data?.total_purchase_price || 0)) || 0)}</p>
       </div>
     </section>
   );
