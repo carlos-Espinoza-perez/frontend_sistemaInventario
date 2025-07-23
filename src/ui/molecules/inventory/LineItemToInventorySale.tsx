@@ -122,7 +122,7 @@ const LineItemToInventorySale = (
           />
 
           <p className="text-[var(--text-secondary)] text-xs font-normal leading-normal mt-1">
-            Costo: {formatMoney(parseInt(item.last_sale_price?.toString() || "0"))}
+            Precio de venta: {formatMoney(parseInt(item.last_sale_price?.toString() || "0"))}
           </p>
         </div>
 

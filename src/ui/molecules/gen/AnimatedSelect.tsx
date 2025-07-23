@@ -97,7 +97,7 @@ export default function AnimatedSelect(props: IAnimatedSelect) {
               {filteredOptions.map((o) => (
                 <li
                   key={o.value}
-                  className="px-3 py-3 hover:bg-gray-100 cursor-pointer"
+                  className="px-3 py-4 hover:bg-gray-100 cursor-pointer text-base"
                   onClick={() => {
                     handleSelect(o.value);
                     props.change(o);
