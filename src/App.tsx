@@ -15,6 +15,7 @@ import TransactionHistory from './ui/pages/transaction/TransactionHistory';
 import EntryTransaction from './ui/pages/transaction/EntryTransaction';
 import ExitTransaction from './ui/pages/transaction/ExitTransaction';
 import ListDebtInventory from './ui/pages/inventory/ListDebtInventory';
+import AssistantPage from './ui/pages/gen/Assistant';
 
 const App = () => {
   return (
@@ -41,6 +42,8 @@ const App = () => {
 
 
         <Route path="Inventory/Debt" element={<ListDebtInventory />} />
+
+        <Route path="Assistant" element={<AssistantPage />} />
       </Route>
 
       

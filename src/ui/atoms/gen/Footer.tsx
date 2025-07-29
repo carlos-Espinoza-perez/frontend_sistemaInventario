@@ -8,7 +8,7 @@ const Footer = () => {
     { icon: "dashboard", label: "Inicio", path: "/" },
     { icon: "warehouse", label: "Bodegas", path: "/warehouses" },
     { icon: "inventory", label: "Inventario", path: "/inventory" },
-    // { icon: "settings", label: "Settings", path: "/settings" },
+    { icon: "auto_awesome", label: "Asistente", path: "/assistant" },
   ];
 
   return (
