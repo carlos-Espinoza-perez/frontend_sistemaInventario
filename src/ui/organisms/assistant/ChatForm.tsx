@@ -1,4 +1,3 @@
-import axios from "axios";
 import { addNewChatMessage, setIsLoading } from "../../../features/AssistantSlice";
 import { useAppDispatch } from "../../../hook/useAppDispatch";
 import { useAppSelector } from "../../../hook/useAppSelector";
