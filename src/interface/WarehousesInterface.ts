@@ -3,6 +3,7 @@ import type { IInventoryGrouped } from "./InventoryInterface";
 export interface IWarehouseSlice { 
   listWarehouses: IWarehouse[];
   warehouse: IWarehouse,
+  nameFilterWarehouse: string,
   listItemByWarehouse: IInventoryGrouped[]
 }
 

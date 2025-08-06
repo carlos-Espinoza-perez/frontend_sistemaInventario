@@ -1,8 +1,8 @@
 import InventoryCreateTemplate from "../../templates/inventory/InventoryCreateTemplate";
 
-const InventoryCreate = () => {
+const InventoryCreate = ({ typeMovement }: { typeMovement: 'entrada' | 'salida'; }) => {
   return (
-    <InventoryCreateTemplate />
+    <InventoryCreateTemplate typeMovement={typeMovement} />
   );
 };
 

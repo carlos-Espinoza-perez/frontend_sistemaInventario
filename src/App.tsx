@@ -35,7 +35,8 @@ const App = () => {
 
         <Route path="Warehouses/Create" element={<WarehouseCreate />} />
 
-        <Route path="Inventory/Create/:warehouse_id" element={<InventoryCreate />} />
+        <Route path="Inventory/Ingreso/:warehouse_id" element={<InventoryCreate typeMovement='entrada'/>} />
+        <Route path="Inventory/Salida/:warehouse_id" element={<InventoryCreate typeMovement='salida'/>} />
 
         <Route path="Transaction/Entry/:item_movement_group_id" element={<EntryTransaction />} />
         <Route path="Transaction/Exit/:sale_group_id" element={<ExitTransaction />} />

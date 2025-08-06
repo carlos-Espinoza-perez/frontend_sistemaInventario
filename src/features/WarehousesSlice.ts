@@ -10,6 +10,7 @@ const initialState: IWarehouseSlice = {
     created_at: "",
     location: ""
   },
+  nameFilterWarehouse: "",
   listItemByWarehouse: []
 };
 
@@ -27,9 +28,13 @@ const warehousesSlice = createSlice({
 
     setListItemByWarehouse: (state, action) => {
       state.listItemByWarehouse = action.payload;
-    }
+    },
+
+    setNameFilterWarehouse: (state, action) => {
+      state.nameFilterWarehouse = action.payload;
+    },
   },
 });
 
-export const { setListWarehouses, setWarehouse, setListItemByWarehouse } = warehousesSlice.actions;
+export const { setListWarehouses, setWarehouse, setListItemByWarehouse, setNameFilterWarehouse } = warehousesSlice.actions;
 export default warehousesSlice.reducer;

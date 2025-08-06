@@ -5,11 +5,6 @@ const CardWarehousesDetail = ({ warehouse }: { warehouse: IWarehouse }) => {
   return (
     <div className="p-4 @container">
       <div className="flex flex-col items-center gap-4 rounded-xl border border-[var(--divider-color)] bg-[var(--surface-color)] p-6 shadow-sm">
-        <div className="bg-center bg-no-repeat aspect-square bg-cover rounded-lg h-32 w-32"
-          style={{
-            backgroundImage: "url('https://picsum.photos/300/200')"
-          }}
-        ></div>
         <div className="flex flex-col items-center justify-center">
           <p className="text-[var(--primary-text-color)] text-2xl font-bold leading-tight tracking-[-0.015em] text-center">{warehouse.name}</p>
           <p className="text-[var(--secondary-text-color)] text-base font-normal leading-normal text-center mt-1">{warehouse.location}</p>
