@@ -7,7 +7,6 @@ const Footer = () => {
   const navItems = [
     { icon: "dashboard", label: "Inicio", path: "/" },
     { icon: "warehouse", label: "Bodegas", path: "/warehouses" },
-    { icon: "inventory", label: "Inventario", path: "/inventory" },
     { icon: "auto_awesome", label: "Asistente", path: "/assistant" },
   ];
 

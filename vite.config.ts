@@ -15,30 +15,6 @@ export default defineConfig({
     port: 5173
   },
   plugins: [
-    react(),
-    VitePWA({
-      registerType: "autoUpdate",
-      includeAssets: ["Logo-192.png", "Logo-512.png"],
-      manifest: {
-        name: "Sistema de inventario",
-        short_name: "Inventario",
-        start_url: "/",
-        display: "standalone",
-        background_color: "#ffffff",
-        theme_color: "#000000",
-        icons: [
-          {
-            src: "Logo-192.png",
-            sizes: "192x192",
-            type: "image/png",
-          },
-          {
-            src: "Logo-512.png",
-            sizes: "512x512",
-            type: "image/png",
-          },
-        ],
-      },
-    }),
+    react()
   ],
 });

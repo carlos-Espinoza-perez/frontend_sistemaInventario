@@ -11,10 +11,11 @@ const LineItemToInventoryMovements = ({
   {
     item: IInventoryMovements, setRemoveItem: () => void; changeValue: (item: IInventoryMovements) => void; addNewLine: () => void;
     index: number
-   }
+  }
 ) => {
   const baseTabIndex = index * 10;
   const listItemToInventory = useAppSelector(a => a.inventory.listItemByInventory);
+  const itemRecentCreated = useAppSelector(a => a.inventory.itemRecentCreated);
 
   const requiredFields = ["item_id", "quantity", "purchase_price", "sale_price"];
   const [tempValue, setTempValue] = useState<IInventoryMovements>(item);
@@ -69,6 +70,18 @@ const LineItemToInventoryMovements = ({
     });
   }, [item.key]);
 
+  useEffect(() => {
+    if (!itemRecentCreated) return;
+
+    const itemFound = listItemToInventory.find(a => a.value == itemRecentCreated.id.toString());
+    if (!itemFound) return;
+
+
+    changeSelect(itemFound);
+  }, [listItemToInventory, itemRecentCreated])
+
+  console.log(itemRecentCreated, listItemToInventory);
+
 
   return (
     <div className="space-y-3">
@@ -94,7 +107,7 @@ const LineItemToInventoryMovements = ({
             type="number"
 
             defaultValue={item.quantity == 0 ? "" : item.quantity}
-            onChange={handleChange}
+            onKeyUp={handleChange as any}
             name="quantity"
             tabIndex={baseTabIndex + 1}
           />
@@ -123,7 +136,7 @@ const LineItemToInventoryMovements = ({
             type="number"
             defaultValue={item.purchase_price == 0 ? "" : item.purchase_price}
 
-            onChange={handleChange}
+            onKeyUp={handleChange as any}
             name="purchase_price"
             tabIndex={baseTabIndex + 2}
           />
@@ -140,7 +153,7 @@ const LineItemToInventoryMovements = ({
             type="number"
             defaultValue={item.sale_price == 0 ? "" : item.sale_price}
 
-            onChange={handleChange}
+            onKeyUp={handleChange as any}
             name="sale_price"
             tabIndex={baseTabIndex + 3}
           />

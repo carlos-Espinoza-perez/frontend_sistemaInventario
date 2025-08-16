@@ -16,7 +16,7 @@ const LineItemToInventorySale = (
     }
 ) => {
   const baseTabIndex = index * 10;
-  const listItemToInventory = useAppSelector(a => a.inventory.listItemByInventory);
+  const { listItemByInventory } = useAppSelector(a => a.inventory);
 
   const requiredFields = ["item_id", "quantity", "sale_price"];
   const [tempValue, setTempValue] = useState<IInventoryMovements>(item);
@@ -63,7 +63,6 @@ const LineItemToInventorySale = (
   useEffect(() => {
     reviewTempValue();
   }, [tempValue]);
-
   return (
     <div className="space-y-0">
       <div className="flex items-top space-x-2">
@@ -71,7 +70,7 @@ const LineItemToInventorySale = (
           <label className="block text-[var(--text-primary)] text-sm font-medium leading-tight mb-1" htmlFor="item-1">Producto</label>
           <div className="relative">
             <AnimatedSelect
-              options={listItemToInventory}
+              options={listItemByInventory}
               label="Seleccionar producto"
               change={changeSelect}
               defaultOptionValue={item.item_id.toString()}
@@ -88,7 +87,7 @@ const LineItemToInventorySale = (
             type="number"
 
             defaultValue={item.quantity == 0 ? "" : item.quantity}
-            onBlur={handleChange}
+            onKeyUp={handleChange as any}
             name="quantity"
             max={item.total_quantity?.toString() || "0"}
             tabIndex={baseTabIndex + 1}
@@ -112,11 +111,10 @@ const LineItemToInventorySale = (
             className={`form-input block w-full rounded-lg text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] border ${colorFieldValid("sale_price")} bg-white h-12 placeholder:text-[var(--text-secondary)] px-3 text-sm font-normal leading-normal`}
             id={`selling-price-${item.key}`}
             placeholder="e.g. 15.99"
-            step="0.01"
             type="number"
             defaultValue={item.sale_price == 0 ? "" : item.sale_price}
 
-            onBlur={handleChange}
+            onKeyUp={handleChange as any}
             name="sale_price"
             tabIndex={baseTabIndex + 2}
           />

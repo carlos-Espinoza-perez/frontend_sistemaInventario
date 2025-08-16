@@ -3,6 +3,7 @@ import axios from "axios";
 // Base URL de tu API
 const BASE_URL = import.meta.env.VITE_API_URL || "https://sistemainventario-shy2.onrender.com";
 
+console.log(BASE_URL);
 // Obtener el token (puedes personalizarlo según tu auth)
 const getToken = () => {
   return localStorage.getItem("jwt_token"); // o desde un context/store

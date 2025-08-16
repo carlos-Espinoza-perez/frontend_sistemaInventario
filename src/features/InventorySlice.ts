@@ -7,6 +7,7 @@ const initialState: IInventorySlice = {
   listCategoryByInventory: [],
   listItemGloabl: [],
   listItemFiltered: [],
+  itemRecentCreated: null,
 
   warehouseFilterId: 0,
   categoryFilterId: 0,
@@ -92,12 +93,16 @@ const inventorySlice = createSlice({
 
     toggleOrderDirection: (state) => {
       state.orderDirection = state.orderDirection === "asc" ? "desc" : "asc";
-    }
+    },
+
+    setItemRecentCreated: (state, action) => {
+      state.itemRecentCreated = action.payload;
+    },
   },
 });
 
 export const {
   setListItemByInventory, setListCategoryByInventory, setListItemGloabl, setListItemFiltered, setWarehouseFilterId,
-  setCategoryFilterId, setGroupByItemsByItemId, toggleOrderDirection
+  setCategoryFilterId, setGroupByItemsByItemId, toggleOrderDirection, setItemRecentCreated
 } = inventorySlice.actions;
 export default inventorySlice.reducer;

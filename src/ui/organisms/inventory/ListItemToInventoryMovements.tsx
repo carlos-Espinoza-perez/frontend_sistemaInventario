@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocalStorage } from "../../../hook/useLocalStorage";
 import LineItemToInventoryMovements from "../../molecules/inventory/LineItemToInventoryMovements";
 import { v4 } from 'uuid';
@@ -79,7 +79,7 @@ const ListItemToInventoryMovements = ({ type }: { type: 'entrada' | 'salida' }) 
         <div className="p-4 border border-[var(--border-color)] rounded-lg space-y-4 bg-slate-50">
           {
             listItem.map((a, index) =>
-              <>
+              <React.Fragment key={`item-${index}`}>
                 {
                   type === "salida" && (
                     <LineItemToInventorySale
@@ -108,7 +108,7 @@ const ListItemToInventoryMovements = ({ type }: { type: 'entrada' | 'salida' }) 
                   index != listItem.length - 1 &&
                   <hr />
                 }
-              </>
+              </React.Fragment>
             )
           }
         </div>

@@ -38,7 +38,8 @@ export interface IInventoryMovements {
 
 
 export interface IInventorySlice {
-  listItemByInventory: IOption[]
+  listItemByInventory: IOption[];
+  itemRecentCreated: IItem | null;
 
   listItemGloabl: IInventoryGrouped[];
   listItemFiltered: IInventoryGrouped[];

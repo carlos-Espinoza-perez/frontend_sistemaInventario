@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import AddCategoryButton from "../category/AddCategoryButton";
 
 const QuickActions = () => {
+  return <></>;
   return (
     <section>
       <div className="mb-3 flex items-center justify-between">
