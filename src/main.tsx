@@ -23,3 +23,31 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     </Provider>
   </React.StrictMode>
 );
+
+
+// Activando el ServiceWorker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js').then((registration) => {
+      registration.onupdatefound = () => {
+        const newSW = registration.installing;
+        if (newSW) {
+          newSW.onstatechange = () => {
+            if (
+              newSW.state === 'installed' &&
+              navigator.serviceWorker.controller
+            ) {
+              // ✅ Hay una nueva versión → recargar automáticamente
+              newSW.postMessage({ type: 'SKIP_WAITING' });
+              newSW.addEventListener('statechange', (e) => {
+                if (newSW.state === 'activated') {
+                  window.location.reload();
+                }
+              });
+            }
+          };
+        }
+      };
+    });
+  });
+}
