@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sistema-inventario-1755885717491';
+const CACHE_NAME = 'sistema-inventario-1756350796630';
 const OFFLINE_URL = '/';
 const FILES_TO_CACHE = [
   '/',
