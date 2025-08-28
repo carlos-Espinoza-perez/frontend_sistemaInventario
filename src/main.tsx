@@ -39,7 +39,7 @@ if ('serviceWorker' in navigator) {
             ) {
               // ✅ Hay una nueva versión → recargar automáticamente
               newSW.postMessage({ type: 'SKIP_WAITING' });
-              newSW.addEventListener('statechange', (e) => {
+              newSW.addEventListener('statechange', () => {
                 if (newSW.state === 'activated') {
                   window.location.reload();
                 }
