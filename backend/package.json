@@ -1,0 +1,20 @@
+{
+  "name": "si-no",
+  "version": "1.0.0",
+  "description": "Node del sistema de inventario",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "Carlos Espinoza",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "openai": "^5.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
