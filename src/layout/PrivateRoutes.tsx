@@ -8,7 +8,9 @@ const PrivateRoute = () => {
   useEffect(() => {
     const verifyAccess = async () => {
       try {
-        await axiosPrivate.get("/auth/me");
+        const user = await axiosPrivate.get("/auth/me");
+        if (user.status === 200)
+          localStorage.setItem("user", JSON.stringify(user.data));
         setIsAllowed(true);
       } catch {
         setIsAllowed(false);
